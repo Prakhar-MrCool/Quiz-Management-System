@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.quiz.Quiz_Management_System.DTO.AuthRequest;
-import com.quiz.Quiz_Management_System.DTO.AuthResponse;
+import com.quiz.Quiz_Management_System.DTO.AuthRequestDTO;
+import com.quiz.Quiz_Management_System.DTO.AuthResponseDTO;
 import com.quiz.Quiz_Management_System.Service.AuthService;
 
 import jakarta.validation.Valid;
@@ -22,12 +22,12 @@ public class AuthController {
 	private final AuthService authService;
 	
 	@PostMapping("/login")
-	public ResponseEntity<AuthResponse> login( @Valid
-            @RequestBody AuthRequest request) {
+	public ResponseEntity<AuthResponseDTO> login( @Valid
+            @RequestBody AuthRequestDTO request) {
 
         String token = authService.login(request.username(), request.password());
         System.out.println("token "+token);
 
-        return ResponseEntity.ok(new AuthResponse(token));
+        return ResponseEntity.ok(new AuthResponseDTO(token));
     }
 }
